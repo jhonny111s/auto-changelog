@@ -117,6 +117,22 @@ const filterRegexFlags = (flags) => {
   return Array.from(finalFlags).join("")
 }
 
+const dotNotationToObject = (str, value) => {
+  const props = str.split('.');
+  const last = props.pop()
+
+  let ref = {}
+  const object = ref;
+  props.forEach(prop => {
+    ref[prop] = {};
+    ref = ref[prop];
+  });
+
+  ref[last] = value;
+
+  return object
+}
+
 
 module.exports = {
   updateLog,
@@ -132,5 +148,6 @@ module.exports = {
   writeFile,
   fileExists,
   readJson,
-  filterRegexFlags
+  filterRegexFlags,
+  dotNotationToObject
 }
